@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn, PrimaryColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, PrimaryColumn, OneToMany } from "typeorm";
+import { Contact } from "./contact.entities";
 
 @Entity("users")
 class User {
@@ -17,6 +18,9 @@ class User {
   
   @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
   registrationDate: Date;
+
+  @OneToMany(() => Contact, (contact: { user: any; }) => contact.user) 
+  contacts: Contact[];
 }
 
 export { User };
