@@ -1,1 +1,1 @@
-buildCommand: cd sprint2_m6/backend && yarn install && ./build.sh
+buildCommand: cd ./backend && npm install && ./build.sh
