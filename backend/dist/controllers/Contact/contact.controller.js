@@ -12,7 +12,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.createContactController = void 0;
 const createCont_service_1 = require("../../services/Contact/createCont.service");
 const createContactController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const newContact = yield (0, createCont_service_1.createContactService)(req.body);
+    const { userId } = req.params; // Assuming you have the userId available in the request object
+    const newContact = yield (0, createCont_service_1.createContactService)(req.body, userId);
     return res.status(201).json(newContact);
 });
 exports.createContactController = createContactController;

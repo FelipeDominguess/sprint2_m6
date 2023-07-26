@@ -28,6 +28,7 @@ const updateContactService = (email, newData) => __awaiter(void 0, void 0, void 
         fullName: contact.fullName,
         email: contact.email,
         phone: contact.phone,
+        user: contact.user
     };
 });
 exports.updateContactService = updateContactService;

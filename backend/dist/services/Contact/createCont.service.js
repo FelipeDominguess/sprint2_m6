@@ -12,28 +12,32 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.createContactService = void 0;
 const data_source_1 = require("../../data-source");
 const contact_entities_1 = require("../../entities/contact.entities");
+const user_entitie_1 = require("../../entities/user.entitie");
 const AppError_1 = require("../../errors/AppError");
-const createContactService = (data) => __awaiter(void 0, void 0, void 0, function* () {
+const createContactService = (data, userId) => __awaiter(void 0, void 0, void 0, function* () {
     const { email, fullName, phone } = data;
     const ContactRepository = data_source_1.AppDataSource.getRepository(contact_entities_1.Contact);
-    const findUser = yield ContactRepository.findOne({
-        where: {
-            email
-        }
-    });
+    const UserRepository = data_source_1.AppDataSource.getRepository(user_entitie_1.User);
+    const user = yield UserRepository.findOne({ where: { id: userId } });
+    if (!user) {
+        throw new AppError_1.AppError("User not found", 404);
+    }
+    const findUser = yield ContactRepository.findOne({ where: { email } });
     if (findUser) {
-        throw new AppError_1.AppError("user already exists", 409);
+        throw new AppError_1.AppError("User already exists", 409);
     }
     const contact = ContactRepository.create({
         fullName,
         email,
         phone,
+        user: user, // Use the user directly here
     });
     yield ContactRepository.save(contact);
-    return {
-        fullName: contact.fullName,
-        email: contact.email,
-        phone: contact.phone
-    };
+    return Object.assign(Object.assign({}, contact), { user: {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            registrationDate: user.registrationDate,
+        } });
 });
 exports.createContactService = createContactService;

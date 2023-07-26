@@ -19,7 +19,8 @@ const getAllContactsService = () => __awaiter(void 0, void 0, void 0, function* 
         fullName: Contact.fullName,
         email: Contact.email,
         registrationDate: Contact.registrationDate,
-        phone: Contact.phone
+        phone: Contact.phone,
+        user: Contact.user
     }));
 });
 exports.getAllContactsService = getAllContactsService;
