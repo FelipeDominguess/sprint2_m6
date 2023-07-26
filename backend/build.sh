@@ -1,6 +1,8 @@
+// build.sh
 #!/usr/bin/env bash
 # exit on error
 set -o errexit
-pip install -r requirements.txt
-python manage.py collectstatic --no-input
-python manage.py migrate
+
+npm install
+yarn run build
+npm run typeorm migration:run -- -d dist/data-source
