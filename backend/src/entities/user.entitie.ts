@@ -18,9 +18,9 @@ class User {
   
   @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
   registrationDate: Date;
+  contacts: any;
 
-  @OneToMany(() => Contact, (contact: { user: any; }) => contact.user) 
-  contacts: Contact[];
+ 
 }
 
 export { User };

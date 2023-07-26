@@ -18,6 +18,9 @@ class Contact {
   @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
   registrationDate: Date;
 
+   @ManyToOne(() => User, (user) => user.contacts)
+    @JoinColumn({ name: "user_id" }) 
+    user: User;
 }
 
 export { Contact };

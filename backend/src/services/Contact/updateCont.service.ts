@@ -25,6 +25,7 @@ const updateContactService = async (email: string, newData: { fullName: string; 
     fullName: contact.fullName,
     email: contact.email,
     phone: contact.phone,
+    user: contact.user
   };
 };
 

@@ -16,6 +16,8 @@ type TLoginRequest = {
     password: string
 }
 
+interface TCompleteContact extends TContactResponse {
+    user: TUser
+}
 
-
-export { TUser, TUserRequest, TUserResponse, TContact, TContactResponse, TLoginRequest }
+export { TUser, TUserRequest, TUserResponse, TContact, TContactResponse, TLoginRequest, TCompleteContact }

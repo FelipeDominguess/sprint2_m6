@@ -10,7 +10,8 @@ const getAllContactsService = async (): Promise<TContactResponse[]> => {
     fullName: Contact.fullName,
     email: Contact.email,
     registrationDate: Contact.registrationDate,
-    phone: Contact.phone
+    phone: Contact.phone,
+    user: Contact.user
   }));
 };
 

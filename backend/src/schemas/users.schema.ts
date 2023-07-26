@@ -1,33 +1,40 @@
-import { z } from "zod"
+// ../schemas/users.schema.ts
 
+import { z } from "zod";
 
 const userSchema = z.object({
     id: z.string(),
     name: z.string(),
     email: z.string().email(),
     password: z.string(),
-    registrationDate: z.date()
-})
+    registrationDate: z.date(),
+});
 
 const userSchemaRequest = userSchema.omit({
     id: true,
-    registrationDate: true
-})
+    registrationDate: true,
+});
 
 const userSchemaResponse = userSchema.omit({
-    password: true
-})
-
+    password: true,
+});
 
 const contactSchema = z.object({
     fullName: z.string(),
     email: z.string().email(),
     phone: z.string(),
-    registrationDate: z.date()
-})
+    registrationDate: z.date(),
+    user: userSchemaResponse, // Include the user schema here
+});
 
 const contactSchemaResponse = contactSchema.omit({
-    registrationDate: true
-})
+    registrationDate: true,
+});
 
-export { userSchema, userSchemaRequest, userSchemaResponse, contactSchema, contactSchemaResponse }
+export {
+    userSchema,
+    userSchemaRequest,
+    userSchemaResponse,
+    contactSchema,
+    contactSchemaResponse,
+};
