@@ -1,7 +1,7 @@
 // build.sh
 #!/usr/bin/env bash
 # exit on error
-chmod +x sprint2/backend/build.sh
+chmod +x sprint2_m6/backend/build.sh
 
 set -o errexit
 
