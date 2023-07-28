@@ -1,6 +1,8 @@
-import { AppDataSource } from "../../src/data-source";
-import { User } from "../../src/entities/user.entitie";
+
+
 import { FindOneOptions } from "typeorm";
+import { AppDataSource } from "../data-source";
+import { User } from "../entities/user.entitie";
 
 const deleteUserService = async (id: string): Promise<void> => {
   const userRepository = AppDataSource.getRepository(User);

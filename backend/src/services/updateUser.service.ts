@@ -1,7 +1,9 @@
-import { AppDataSource } from "../../src/data-source";
-import { User } from "../../src/entities/user.entitie";
+
+
 import { TUserResponse } from "../../src/interfaces/users.interfaces";
 import { getRepository, FindOneOptions } from "typeorm";
+import { AppDataSource } from "../data-source";
+import { User } from "../entities/user.entitie";
 
 const updateUserService = async (id: string, data: Partial<TUserResponse>): Promise<TUserResponse> => {
   const userRepository = AppDataSource.getRepository(User);

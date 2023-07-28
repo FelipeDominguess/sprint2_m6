@@ -1,9 +1,11 @@
 import { hash } from "bcryptjs";
-import { AppDataSource } from "../../src/data-source";
-import { User } from "../../src/entities/user.entitie";
+
 import { TUserRequest, TUserResponse } from "../../src/interfaces/users.interfaces";
-import { AppError } from "../../src/errors/AppError";
+
 import { userSchemaResponse } from "../../src/schemas/users.schema";
+import { AppDataSource } from "../data-source";
+import { User } from "../entities/user.entitie";
+import { AppError } from "../errors/AppError";
 
 
 

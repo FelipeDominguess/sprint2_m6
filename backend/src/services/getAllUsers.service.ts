@@ -1,8 +1,9 @@
 // services/getAllUsers.service.ts
 
-import { AppDataSource } from "../../src/data-source";
-import { User } from "../../src/entities/user.entitie";
+
 import { TUserResponse } from "../../src/interfaces/users.interfaces";
+import { AppDataSource } from "../data-source";
+import { User } from "../entities/user.entitie";
 
 const getAllUsersService = async (): Promise<TUserResponse[]> => {
   const userRepository = AppDataSource.getRepository(User);
