@@ -1,5 +1,4 @@
 import { DataSource, DataSourceOptions } from "typeorm"
-import "reflect-metadata";
 import path from "node:path"
 import "dotenv/config"
 
