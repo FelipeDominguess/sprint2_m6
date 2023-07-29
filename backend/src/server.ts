@@ -8,7 +8,10 @@ const cors = require('cors');
 
 AppDataSource.initialize()
     .then(() => {
-        app.use(cors())
+        app.use(cors({
+            origin: 'http://localhost:5173',
+            credentials: true, 
+          }));
         const PORT = process.env.PORT || 3000
         app.listen(PORT, () => {
             console.log(`Server is running on ${PORT}`)
