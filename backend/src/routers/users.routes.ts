@@ -9,6 +9,7 @@ import { createContactController } from "../controllers/Contact/contact.controll
 import { getAllContactsController } from "../controllers/Contact/contactGetAll.controller";
 import { deleteContactController } from "../controllers/Contact/contactDelete.controller";
 import { updateContactController } from "../controllers/Contact/contactUpdate.controller";
+import { ensureAuthMiddleware } from "../middlewares/ensureAuth.middleware";
 
 
 const userRoutes = Router()
@@ -19,8 +20,8 @@ userRoutes.patch("/:id",updateUserController)
 userRoutes.delete("/:id",deleteUserController)
 
 
-userRoutes.post("/contact", createContactController )
-userRoutes.get("/contact", getAllContactsController)
+userRoutes.post("/contact", ensureAuthMiddleware, createContactController )
+userRoutes.get("/contact", ensureAuthMiddleware, getAllContactsController)
 userRoutes.patch("/contact/:email", updateContactController)
 userRoutes.delete("/contact/:email", deleteContactController)
 

@@ -11,20 +11,22 @@ const createContactService = async (data: TContact, userId: string): Promise<TCo
 
     const user = await UserRepository.findOne({ where: { id: userId } });
 
-    if (!user) {
-        throw new AppError("User not found", 404);
+    if (!user) 
+    {
+        throw new AppError("The current logged-in user was not found", 404);
     }
 
-    const findUser = await ContactRepository.findOne({ where: { email } });
-    if (findUser) {
-        throw new AppError("User already exists", 409);
+    const findContact = await ContactRepository.findOne({ where: { email: email, user: {id: user.id} } });
+    if (findContact) 
+    {
+        throw new AppError("Contact already exist", 409);
     }
 
     const contact = ContactRepository.create({
         fullName,
         email,
         phone,
-        user: user, // Use the user directly here
+        user: user,
     });
 
     await ContactRepository.save(contact);
