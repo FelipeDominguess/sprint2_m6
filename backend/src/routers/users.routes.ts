@@ -22,7 +22,7 @@ userRoutes.delete("/:id",deleteUserController)
 
 userRoutes.post("/contact", ensureAuthMiddleware, createContactController )
 userRoutes.get("/contact", ensureAuthMiddleware, getAllContactsController)
-userRoutes.patch("/contact/:email", updateContactController)
-userRoutes.delete("/contact/:email", deleteContactController)
+userRoutes.patch("/contact/:email", ensureAuthMiddleware,updateContactController)
+userRoutes.delete("/contact/:email", ensureAuthMiddleware,deleteContactController)
 
 export { userRoutes }
