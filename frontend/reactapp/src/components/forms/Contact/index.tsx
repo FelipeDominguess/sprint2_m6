@@ -12,51 +12,37 @@ import * as yup from "yup";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { UserContext } from '../../../providers/UserProvider';
 import { useContext } from 'react';
-import { Link } from 'react-router-dom';
-import { styled } from '@mui/material';
+import { ContactContext } from '../../../providers/ContactProvider';
 
-export interface RegisterProps {
-  name: string,
+export interface CreateContactProps {
+  fullName: string,
   email: string,
-  password: string
+  phone: string
 }
 
 export const schema = yup.object({
-  name: yup.string().required("Campo obrigatório"),
+  fullName: yup.string().required("Campo obrigatório"),
   email: yup.string().email("Deve ser um e-mail").required("Campo obrigatório"),
-  password: yup.string().required("Senha é obrigatória"),
-  // confirmpassword: yup.string().required("Confirmar senha é obrigatória"),
+  phone:yup.string().required('Telefone inválido. Use o formato (99) 9999-9999.'),
 });
 
-const DivFooterRegister = styled(Box)`
-  width: 260px;
-  display: flex;
-  flex-direction: row;
-  height: 60px;
-  gap: 50px;
-  margin-top: 10px;
 
-`
-
-
-export default function InputWithIcon() {
+export default function FormContact() {
   const { register, handleSubmit, formState:{errors}, } = useForm({
     resolver: yupResolver(schema)
   });
 
-  const { registerUser } = useContext(UserContext);
+  const { createContact } = useContext(ContactContext);
   
-  const submit: SubmitHandler<RegisterProps> = (data) => {
-    registerUser(data)
+  const submit: SubmitHandler<CreateContactProps> = (data) => {
+    createContact(data)
   };
-
-  const isRegistered = false;
   return (
     <Box sx={{ '& > :not(style)': { m: 1 } }}>
       <form  onSubmit={handleSubmit(submit)}>
       <FormControl variant="standard">
         <InputLabel htmlFor="input-with-icon-adornment">
-          Nome de usuário
+          Nome de contato
         </InputLabel>
         <Input
           id="input-with-icon-adornment"
@@ -65,9 +51,9 @@ export default function InputWithIcon() {
               <AccountCircle />
             </InputAdornment>
           }
-        {...register('name')}
+        {...register('fullName')}
         />
-         {errors.name && <p>{errors.name.message}</p>}
+         {errors.fullName && <p>{errors.fullName.message}</p>}
          <TextField
         id="input-with-icon-textfield"
         label="Email"
@@ -82,9 +68,11 @@ export default function InputWithIcon() {
         {...register('email')}
       />
        {errors.email && <p>{errors.email.message}</p>}
+
+
        <TextField
         id="input-with-icon-textfield"
-        label="Senha"
+        label="Telefone"
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
@@ -93,19 +81,12 @@ export default function InputWithIcon() {
           ),
         }}
         variant="standard"
-        {...register('password')}
+        {...register('phone')}
       />
-      {errors.password && <p>{errors.password.message}</p>}
-        <DivFooterRegister>
-        <Button variant="contained" type='submit'>Confirmar</Button>
-        <Button component={Link} to="/login" variant="contained">
-           Ir para login
-        </Button>
-        </DivFooterRegister>
-      
+        {errors.phone && <p>{errors.phone.message}</p>}
+      <Button variant="contained" type='submit'>Criar Contato</Button>
       </FormControl>
       </form>
-
     </Box>
   );
 }
